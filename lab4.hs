@@ -19,22 +19,23 @@ expr1 = Or (And T F) (Not F)
 expr2 :: BoolExpr
 expr2 = Or (Not (And T F)) (Implies T F)
 
--- TODO: expr3 should be your own expression
+-- expr3 should be your own expression
 -- that uses each operator (&, |, ~, ->) at least once
 expr3 :: BoolExpr
-expr3 = undefined
+expr3 = (Implies (And T F) (Not (Or F F)))
 
 -- evaluate a BoolExpr to result in a Haskell Bool
--- TODO: implement eval for Or, Not, and Implies
 eval :: BoolExpr -> Bool
 eval T = True
 eval F = False
 eval (And a b) = eval a && eval b
-eval (Or a b) = undefined
-eval (Not a) = undefined
-eval (Implies a b) = undefined
+eval (Or a b) = eval a || eval b
+eval (Not a) = not (eval a)
+-- The implementation for Implies uses the fact that
+-- a -> b is equivalent to ~a | b
+eval (Implies a b) = eval (Or (Not a) b)
 
--- TODO: make sure these evaluate to the correct value
+-- make sure these evaluate to the correct value
 val0 = eval expr0
 
 val1 = eval expr1
