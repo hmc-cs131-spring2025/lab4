@@ -45,14 +45,14 @@ val2 = eval expr2
 val3 = eval expr3
 
 -- pretty print a bool expression
--- TODO: implement pretty printing for Or, Not, Implies
+-- implement pretty printing for Or, Not, Implies
 prettyPrint :: BoolExpr -> String
 prettyPrint T = "T"
 prettyPrint F = "F"
 prettyPrint (And a b) = "(" ++ prettyPrint a ++ " & " ++ prettyPrint b ++ ")"
-prettyPrint (Or a b) = undefined
-prettyPrint (Not a) = undefined
-prettyPrint (Implies a b) = undefined
+prettyPrint (Or a b) = "(" ++ prettyPrint a ++ " | " ++ prettyPrint b ++ ")"
+prettyPrint (Not a) = "(~" ++ prettyPrint a ++ ")"
+prettyPrint (Implies a b) = "(" ++ prettyPrint a ++ " -> " ++ prettyPrint b ++ ")"
 
 -- make sure these convert to the correct strings
 str0 = prettyPrint expr0
