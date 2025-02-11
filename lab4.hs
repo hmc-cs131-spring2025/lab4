@@ -15,9 +15,9 @@ expr0 = And T F
 expr1 :: BoolExpr
 expr1 = Or (And T F) (Not F)
 
--- TODO: expr2 should represent ~ (T & F) | (T -> F)
+-- expr2 should represent (~(T & F)) | (T -> F)
 expr2 :: BoolExpr
-expr2 = undefined
+expr2 = Or (Not (And T F)) (Implies T F)
 
 -- TODO: expr3 should be your own expression
 -- that uses each operator (&, |, ~, ->) at least once
